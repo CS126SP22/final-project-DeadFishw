@@ -19,13 +19,14 @@ namespace finalproject {
         char* GetColor() const;
         void Display() const;
         void AdvanceOneFrame();
+        void SetVelocity(vec2 velocity);
 
 
 
     private:
         size_t length_;
         size_t width_;
-        bool is_breakable_;
+        glm::vec2 velocity_;
         glm::vec2 position_;
         char* color_;
         size_t speed_;

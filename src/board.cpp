@@ -24,3 +24,7 @@ void finalproject::Board::AdvanceOneFrame() {
     position_ = vec2(position_.x + speed_, position_.y);
 }
 
+void finalproject::Board::SetVelocity(vec2 velocity) {
+    velocity_ = velocity;
+}
+

@@ -2,8 +2,8 @@
 // Created by 58217 on 2022/4/12.
 //
 
-#ifndef FINAL_PROJECT_DEADFISHW_WALL_H
-#define FINAL_PROJECT_DEADFISHW_WALL_H
+#ifndef FINAL_PROJECT_DEADFISHW_BLOCK_H
+#define FINAL_PROJECT_DEADFISHW_BLOCK_H
 #pragma once
 
 #include "cinder/gl/gl.h"
@@ -14,16 +14,14 @@ namespace finalproject {
 /**
  * The particle inside the containers.
  */
-    class Wall {
+    class Block {
     public:
-        Wall();
-        Wall(size_t length, size_t width, vec2 position, bool isBreakable);
+        Block();
+        Block(size_t length, size_t width, vec2 position, bool isBreakable);
         vec2 GetPosition() const;
         char* GetColor() const;
         void Display() const;
-
-
-
+        bool IsBreakable() const;
     private:
         size_t length_;
         size_t width_;
@@ -33,4 +31,4 @@ namespace finalproject {
     };
 
 }
-#endif //FINAL_PROJECT_DEADFISHW_WALL_H
+#endif //FINAL_PROJECT_DEADFISHW_BLOCK_H

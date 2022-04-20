@@ -39,7 +39,7 @@ FetchContent_Declare(
 FetchContent_GetProperties(catch2)
 if(NOT catch2_POPULATED)
     FetchContent_Populate(catch2)
-    add_library(catch2 INTERFACE src/wall.cpp include/wall.h include/board.h src/board.cpp)
+    add_library(catch2 INTERFACE src/block.cpp include/block.h include/board.h src/board.cpp)
     target_include_directories(catch2 INTERFACE ${catch2_SOURCE_DIR}/single_include)
 endif()
 
@@ -52,7 +52,7 @@ list(APPEND SOURCE_FILES src/background.cc
         src/particle.cpp
         src/final_project_app.cc
         src/character_particle.cpp
-        src/wall.cpp
+        src/block.cpp
         src/board.cpp)
 
 list(APPEND TEST_FILES tests/test_particle.cc)

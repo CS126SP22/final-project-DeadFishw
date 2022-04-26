@@ -42,6 +42,10 @@ class Background {
 
   Board GetBoard();
 
+  bool Ended();
+
+    void Restart();
+
 private:
   size_t current_frame_;
   const float kLength = 2560.0;

@@ -10,7 +10,7 @@ void Background::Display() const {
     // This function has a lot of magic numbers; be sure to design your code in a way that avoids this.
     ci::gl::color(ci::Color(particle.GetColor()));
     ci::gl::drawSolidCircle(particle.GetPosition(), particle.GetSize());
-
+`
     ci::gl::drawStrokedRect(ci::Rectf(vec2(0, 0), vec2(kLength, kWidth)));
     ci::gl::drawString(
             std::to_string(current_frame_),
@@ -37,5 +37,18 @@ void Background::CharacterMove(char command) {
             player_.SetVelocity(vec2(kVelocity, 0));
             break;
     }
+}
+
+bool Background::Ended() {
+    for (auto& block: blocks_) {
+        if (block->IsBreakable()) {
+            return false;
+        }
+    }
+    return true;
+}
+
+void Background::Restart() {
+
 }
 }  // namespace idealgas

@@ -24,9 +24,13 @@ char *finalproject::Block::GetColor() const {
 }
 
 void finalproject::Block::Display() const {
-    ci::gl::drawStrokedRect(ci::Rectf(position_, vec2(length_, width_)));
+    ci::gl::drawStrokedRect(ci::Rectf(position_, vec2(position_.x+length_, position_.y+width_)));
 }
 
 bool finalproject::Block::IsBreakable() const {
     return is_breakable_;
+}
+
+vec2 finalproject::Block::GetSize() const {
+    return glm::vec2(length_, width_);
 }

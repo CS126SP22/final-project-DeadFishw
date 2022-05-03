@@ -1,7 +1,7 @@
 #pragma once
 
 #include "cinder/gl/gl.h"
-#include "character_particle.h"
+#include "particle.h"
 #include "board.h"
 #include "block.h"
 
@@ -48,11 +48,11 @@ class Background {
 
 private:
   size_t current_frame_;
-  const float kLength = 2560.0;
-  const float kWidth = 1080.0;
+  const float kLength = 600.0;
+  const float kWidth = 800.0;
   const float kVelocity = 5.0;
   Particle particle;
-  std::vector<Block*> blocks_;
+  std::vector<Block> blocks_;
   Board player_;
   void AddRandomParticle();
 };

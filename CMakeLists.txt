@@ -39,7 +39,7 @@ FetchContent_Declare(
 FetchContent_GetProperties(catch2)
 if(NOT catch2_POPULATED)
     FetchContent_Populate(catch2)
-    add_library(catch2 INTERFACE src/block.cpp include/block.h include/board.h src/board.cpp)
+    add_library(catch2 INTERFACE src/block.cpp include/block.h include/board.h src/board.cpp tests/test_particles.cpp)
     target_include_directories(catch2 INTERFACE ${catch2_SOURCE_DIR}/single_include)
 endif()
 
@@ -51,12 +51,8 @@ include("${CINDER_PATH}/proj/cmake/modules/cinderMakeApp.cmake")
 list(APPEND SOURCE_FILES src/background.cc
         src/particle.cpp
         src/final_project_app.cc
-        src/character_particle.cpp
         src/block.cpp
         src/board.cpp)
-
-list(APPEND TEST_FILES tests/test_particle.cc)
-list(APPEND TEST_FILES tests/test_background.cpp)
 
 ci_make_app(
         APP_NAME        final-project
@@ -64,14 +60,5 @@ ci_make_app(
         SOURCES         apps/cinder_app_main.cc ${SOURCE_FILES}
         INCLUDES        include
 )
-
-ci_make_app(
-        APP_NAME        final-project-test
-        CINDER_PATH     ${CINDER_PATH}
-        SOURCES         tests/test_background.cpp ${SOURCE_FILES} ${TEST_FILES}
-        INCLUDES        include
-        LIBRARIES       catch2
-)
-
 
 

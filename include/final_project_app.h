@@ -4,7 +4,6 @@
 #include "cinder/app/RendererGl.h"
 #include "cinder/gl/gl.h"
 #include "background.h"
-#include "character_particle.h"
 #include "particle.h"
 #include <fstream>
 #include <iostream>
@@ -21,8 +20,8 @@ public:
     void draw() override;
     void keyDown(ci::app::KeyEvent event) override;
 
-    const int kWindowLength = 1920;
-    const int kWindowWidth = 1080;
+    const int kWindowLength = 600;
+    const int kWindowWidth = 800;
 private:
     Background background_;
     void setup();

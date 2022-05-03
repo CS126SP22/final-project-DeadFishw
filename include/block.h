@@ -22,6 +22,7 @@ namespace finalproject {
         char* GetColor() const;
         void Display() const;
         bool IsBreakable() const;
+        vec2 GetSize() const;
     private:
         size_t length_;
         size_t width_;

@@ -3,15 +3,23 @@
 
 namespace finalproject {
 Background::Background() {
-
+    player_ = Board(100, 40, vec2(350,600));
+    Block block = Block(50, 50, vec2(0, 400), true);
+    blocks_.push_back(block);
+    particle.SetPosition(vec2(350, 400));
+    particle.SetVelocity(vec2(-5, 0));
 }
 
 void Background::Display() const {
     // This function has a lot of magic numbers; be sure to design your code in a way that avoids this.
-    ci::gl::color(ci::Color(particle.GetColor()));
-    ci::gl::drawSolidCircle(particle.GetPosition(), particle.GetSize());
-`
+    //ci::gl::color(ci::Color(particle.GetColor()));
+    //ci::gl::drawSolidCircle(particle.GetPosition(), particle.GetSize());
     ci::gl::drawStrokedRect(ci::Rectf(vec2(0, 0), vec2(kLength, kWidth)));
+    player_.Display();
+    particle.Display();
+    for(auto& block: blocks_) {
+        block.Display();
+    }
     ci::gl::drawString(
             std::to_string(current_frame_),
             glm::vec2(0, GetSize().y + 50), ci::Color("white"), ci::Font("Arial", 30.0f));
@@ -21,6 +29,8 @@ void Background::AdvanceOneFrame() {
     particle.AdvanceOneFrame();
     particle.CollideWithBlocks(blocks_);
     particle.CollideWithWall(kLength, kWidth);
+    particle.CollideWithBoard(&player_);
+    player_.AdvanceOneFrame();
 }
 
 
@@ -41,7 +51,7 @@ void Background::CharacterMove(char command) {
 
 bool Background::Ended() {
     for (auto& block: blocks_) {
-        if (block->IsBreakable()) {
+        if (block.IsBreakable()) {
             return false;
         }
     }

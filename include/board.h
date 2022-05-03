@@ -14,12 +14,15 @@ namespace finalproject {
     class Board {
     public:
         Board();
-        Board(size_t length, size_t width, vec2 position, bool isBreakable);
+        Board(size_t length, size_t width, vec2 position);
+
         vec2 GetPosition() const;
         char* GetColor() const;
         void Display() const;
         void AdvanceOneFrame();
         void SetVelocity(vec2 velocity);
+        vec2 GetSize() const;
+        vec2 GetVelocity() const;
 
 
 

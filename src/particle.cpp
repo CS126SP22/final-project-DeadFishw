@@ -47,7 +47,8 @@ void Particle::CollideWithWall(float length, float width) {
 
 void Particle::CollideWithBlocks(std::vector<Block> &blocks) {
     for (auto block = blocks.begin(); block != blocks.end(); block++) {
-        if (abs(position_.y - (*block).GetPosition().y) <= kSize &&
+        if ((*block).GetPosition().y - position_.y <= kSize &&
+                (*block).GetPosition().y - position_.y >= 0 &&
                 position_.x >= (*block).GetPosition().x &&
                 position_.x <= (*block).GetPosition().x + (*block).GetSize().x) {//upward
             if (velocity_.y > 0) {
@@ -57,17 +58,19 @@ void Particle::CollideWithBlocks(std::vector<Block> &blocks) {
                     break;
                 }
             }
-        } else if (abs(position_.y - (*block).GetPosition().y) <= kSize &&
-                   position_.x >= (*block).GetPosition().x &&
-                   position_.x <= (*block).GetPosition().x + (*block).GetSize().x) {//downward
-            if (velocity_.x < 0) {
-                velocity_.x = - velocity_.x;
+        } else if (position_.y - (*block).GetPosition().y - (*block).GetSize().y <= kSize &&
+                    position_.y - (*block).GetPosition().y - (*block).GetSize().y >= 0 &&
+                    position_.x >= (*block).GetPosition().x &&
+                    position_.x <= (*block).GetPosition().x + (*block).GetSize().x) {//downward
+            if (velocity_.y < 0) {
+                velocity_.y = - velocity_.y;
                 if ((*block).IsBreakable()) {
                     blocks.erase(block);
                     break;
                 }
             }
-        } else if (abs(position_.x - (*block).GetPosition().x) <= kSize &&
+        } else if (position_.x - (*block).GetPosition().x - (*block).GetSize().x <= kSize &&
+                   position_.x - (*block).GetPosition().x - (*block).GetSize().x >= 0 &&
                   position_.y >= (*block).GetPosition().y &&
                   position_.y <= (*block).GetPosition().y + (*block).GetSize().y) {//downward
             if (velocity_.x < 0) {
@@ -77,18 +80,30 @@ void Particle::CollideWithBlocks(std::vector<Block> &blocks) {
                     break;
                 }
             }
-        } else if (CanCollideCorner(&*block)) {
-            float temp = velocity_.x;
-            velocity_.x = velocity_.y;
-            velocity_.y = temp;
-            if ((*block).IsBreakable()) {
-                blocks.erase(block);
-                break;
+        } else if ((*block).GetPosition().x - position_.x <= kSize &&
+                   (*block).GetPosition().x - position_.x >= 0 &&
+                   position_.y >= (*block).GetPosition().y &&
+                   position_.y <= (*block).GetPosition().y + (*block).GetSize().y) {
+            if (velocity_.x > 0) {
+                velocity_.x = - velocity_.x;
+                if ((*block).IsBreakable()) {
+                    blocks.erase(block);
+                    break;
+                }
+            }
+        }else if (CanCollideCorner(&*block)) {
+                float temp = velocity_.x;
+                velocity_.x = velocity_.y;
+                velocity_.y = temp;
+                if ((*block).IsBreakable()) {
+                    blocks.erase(block);
+                    break;
+                }
             }
         }
-
     }
-}
+
+
     void Particle::CollideWithBoard(Board* board) {
         if (abs(position_.y - board->GetPosition().y) <= kSize &&
             position_.x >= board->GetPosition().x &&
@@ -152,6 +167,10 @@ void Particle::CollideWithBlocks(std::vector<Block> &blocks) {
                 (ruc.x - x) * (ruc.x - x) + (ruc.y - y) * (ruc.y - y) <= kSize * kSize ||
                 (rdc.x - x) * (rdc.x - x) + (rdc.y - y) * (rdc.y - y) <= kSize * kSize ||
                 (ldc.x - x) * (ldc.x - x) + (ldc.y - y) * (ldc.y - y) <= kSize * kSize;
+    }
+
+    vec2 Particle::GetVelocity() {
+        return velocity_;
     }
 
 

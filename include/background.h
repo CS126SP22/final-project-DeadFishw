@@ -24,15 +24,9 @@ class Background {
   void Display() const;
 
   vec2 GetSize() const;
-  /**
-   * Remove all particles from particle.
-   */
-  void RemoveParticles();
 
-  /**
-   * Adding a particle to the vector.
-   */
   std::vector<Block> GetWalls();
+
   void CharacterMove(char command);
   /**
    * Updates the positions and velocities of all particles (based on the rules
@@ -43,6 +37,8 @@ class Background {
   Board GetBoard();
 
   bool Ended();
+
+  Particle GetParticle();
 
     void Restart();
 

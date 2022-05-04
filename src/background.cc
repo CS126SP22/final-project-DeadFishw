@@ -4,10 +4,13 @@
 namespace finalproject {
 Background::Background() {
     player_ = Board(100, 40, vec2(350,600));
-    Block block = Block(50, 50, vec2(0, 400), true);
-    blocks_.push_back(block);
-    particle.SetPosition(vec2(350, 400));
+    Block block = Block(10,10,vec2(500, 5), true);
+    //blocks_.push_back(block);
+    particle.SetPosition(vec2(100,10));
     particle.SetVelocity(vec2(-5, 0));
+    particle.SetVelocity(vec2(-4, 0));
+    particle.SetPosition(vec2(25,21));
+    blocks_.emplace_back(20,20,vec2(0, 0), false);
 }
 
 void Background::Display() const {
@@ -60,5 +63,13 @@ bool Background::Ended() {
 
 void Background::Restart() {
 
+}
+
+Particle Background::GetParticle() {
+    return particle;
+}
+
+std::vector<Block> Background::GetWalls() {
+    return blocks_;
 }
 }  // namespace idealgas

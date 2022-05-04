@@ -25,6 +25,7 @@ namespace finalproject {
         char* GetColor() const;
         void AdvanceOneFrame();
         void CollideWithBoard(Board* board);
+        vec2 GetVelocity();
         void CollideWithWall(float length, float width);
         void CollideWithBlocks(std::vector<Block> &blocks);
         void SetPosition(vec2 position);
@@ -42,6 +43,8 @@ namespace finalproject {
 
 
         bool CanCollideCorner(Block *block);
+
+
     };
 }  // namespace finalproject
 #endif //FINAL_PROJECT_DEADFISHW_PARTICLE_H

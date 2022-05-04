@@ -54,11 +54,21 @@ list(APPEND SOURCE_FILES src/background.cc
         src/block.cpp
         src/board.cpp)
 
+list(APPEND TEST_FILES tests/test_particles.cpp)
+
 ci_make_app(
         APP_NAME        final-project
         CINDER_PATH     ${CINDER_PATH}
         SOURCES         apps/cinder_app_main.cc ${SOURCE_FILES}
         INCLUDES        include
+)
+
+ci_make_app(
+        APP_NAME        gas-simulation-test
+        CINDER_PATH     ${CINDER_PATH}
+        SOURCES         tests/test_main.cc ${SOURCE_FILES} ${TEST_FILES}
+        INCLUDES        include
+        LIBRARIES       catch2
 )
 
 

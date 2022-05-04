@@ -10,14 +10,22 @@ void FinalProjectApp::draw() {
   ci::gl::clear(background_color);
   if (!background_.Ended()) {
       ci::gl::drawString(
-              "Press W/A/S/D to control RED ball and arrow keys to control BLUE ball. Press del to restart",
-              glm::vec2(0, background_.GetSize().y), ci::Color("white"), ci::Font("Arial", 30.0f));
+              "Press W/D to control the board. Press del to restart",
+              glm::vec2(0, 0), ci::Color("white"), ci::Font("Arial", 30.0f));
+  } else {
+      ci::gl::drawString(
+              "The game has ended.",
+              glm::vec2(0, 0), ci::Color("white"), ci::Font("Arial", 30.0f));
+      return;
   }
   background_.Display();
 }
 
 void FinalProjectApp::update() {
-  background_.AdvanceOneFrame();
+    if (background_.Ended()) {
+        return;
+    }
+    background_.AdvanceOneFrame();
 }
 
 void FinalProjectApp::keyDown(ci::app::KeyEvent event) {

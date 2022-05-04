@@ -58,7 +58,7 @@ bool Background::Ended() {
             return false;
         }
     }
-    return true;
+    return particle.GetPosition().y > player_.GetPosition().y + player_.GetSize().y + player_.GetSize().y;
 }
 
 void Background::Restart() {
